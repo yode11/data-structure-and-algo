@@ -1,3 +1,5 @@
+package sort;
+
 public class MergeSort {
 	public static void main(String[] args) {
 		MergeSort object = new MergeSort();
@@ -11,7 +13,7 @@ public class MergeSort {
 		System.out.println();
 
 		object.sort(test);
-		System.out.println("Afer sorting with MergeSort:");
+		System.out.println("After sorting with MergeSort:");
 		for(int t:test){
 			System.out.print(t + " ");
 		}
