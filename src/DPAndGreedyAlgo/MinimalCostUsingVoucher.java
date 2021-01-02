@@ -48,7 +48,7 @@ public class MinimalCostUsingVoucher {
 		// 时间和空间都是最优，面试时候用
 		System.out.println("使用滚动数组进行空间压缩以后，且把问题转换成01背包问题求最大值的DP解法的答案是：");
 		System.out.println(helper2(prices, dishNum, voucherThreshold));
-		
+
 		// 只是普通做法和最优做法的一种中间形态
 		System.out.println("非空间压缩，但是把第一种解法改成了01背包问题求最大值解法的答案是：");
 		System.out.println(helper3(prices, dishNum, voucherThreshold));
@@ -65,11 +65,11 @@ public class MinimalCostUsingVoucher {
 //      #############################
 		int sum = 0;
 
-		for(int p: prices){
+		for (int p : prices) {
 			sum += p;
 		}
 
-		if(sum < voucherThreshold){
+		if (sum < voucherThreshold) {
 			return -1;
 		}
 //		#############################
@@ -105,11 +105,8 @@ public class MinimalCostUsingVoucher {
 				} else {
 					// 这里就是之前提到的Integer.MAX_VALUE的超边界问题。如果dp[i-1][j-arr[i]]是Integer.MAX_VALUE,
 					// arr[i] + dp[i-1][j-arr[i]]肯定是一个负数，因此肯定在Math.min中被取到， 且这个值非常不合理
-					if (dp[i - 1][j - prices[i]] == Integer.MAX_VALUE) {
-						dp[i][j] = dp[i - 1][j];
-					} else {
-						dp[i][j] = Math.min(dp[i - 1][j], prices[i] + dp[i - 1][j - prices[i]]);
-					}
+
+					dp[i][j] = dp[i - 1][j - prices[i]] == Integer.MAX_VALUE ? dp[i - 1][j] : Math.min(dp[i - 1][j], dp[i - 1][j - prices[i]] + prices[i]);
 				}
 			}
 		}
@@ -128,27 +125,27 @@ public class MinimalCostUsingVoucher {
 	因为使用的是一维表，原本j的正序遍历会使得dp的更新会覆盖掉后面dp值计算时候需要的值，导致计算不正确
 	所以这里的j的遍历应该使用逆序遍历，且遍历到j-price[i]。
 	 */
-	private static int helper2(int[] prices, int dishNum, int voucherThreshold){
+	private static int helper2(int[] prices, int dishNum, int voucherThreshold) {
 		int sum = 0;
-		for(int p: prices){
+		for (int p : prices) {
 			sum += p;
 		}
 
-		if(sum < voucherThreshold) return -1;
+		if (sum < voucherThreshold) return -1;
 
-		int maxValue = sum-voucherThreshold;
-		int[] dp = new int[maxValue+1];
+		int maxValue = sum - voucherThreshold;
+		int[] dp = new int[maxValue + 1];
 
-		for(int i=0;i<=maxValue;i++){
+		for (int i = 0; i <= maxValue; i++) {
 			// 不超过price[0]的前提下，最多可以组成多少钱
-			if(i >= prices[0]){
+			if (i >= prices[0]) {
 				dp[i] = prices[0];
 			}
 		}
 
-		for(int i=1;i<dishNum;i++){
-			for(int j=maxValue;j>=prices[i];j--){
-				dp[j] = Math.max(dp[j], dp[j-prices[i]] + prices[i]);
+		for (int i = 1; i < dishNum; i++) {
+			for (int j = maxValue; j >= prices[i]; j--) {
+				dp[j] = Math.max(dp[j], dp[j - prices[i]] + prices[i]);
 			}
 		}
 
@@ -161,33 +158,33 @@ public class MinimalCostUsingVoucher {
 	总的来说，helper1是常规的空间复杂度，加上求最小值问题，helper3是常规的空间复杂度，加上求最大值的01背包问题
 	helper2是两者结合的最优解，既优化了空间，又把原来求最小值的问题改成了求最大值的01背包问题
 	 */
-	private static int helper3(int[] prices, int dishNum, int voucherThreshold){
+	private static int helper3(int[] prices, int dishNum, int voucherThreshold) {
 		int sum = 0;
-		for(int p: prices){
+		for (int p : prices) {
 			sum += p;
 		}
 
-		if(sum < voucherThreshold) return -1;
-		int maxValue = sum-voucherThreshold;
-		int[][] dp = new int[dishNum][maxValue+1];
+		if (sum < voucherThreshold) return -1;
+		int maxValue = sum - voucherThreshold;
+		int[][] dp = new int[dishNum][maxValue + 1];
 
-		for(int i=1;i<=maxValue;i++){
-			if(prices[0] <= i){
+		for (int i = 1; i <= maxValue; i++) {
+			if (prices[0] <= i) {
 				dp[0][i] = prices[0];
 			}
 		}
 
-		for(int i=1;i<dishNum;i++){
-			for(int j=1;j<=maxValue;j++){
-				dp[i][j] = dp[i-1][j];
+		for (int i = 1; i < dishNum; i++) {
+			for (int j = 1; j <= maxValue; j++) {
+				dp[i][j] = dp[i - 1][j];
 
-				if(j>=prices[i]){
-					dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j-prices[i]] + prices[i]);
+				if (j >= prices[i]) {
+					dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - prices[i]] + prices[i]);
 				}
 			}
 		}
 
-		return sum - dp[dishNum-1][maxValue];
+		return sum - dp[dishNum - 1][maxValue];
 
 	}
 }
