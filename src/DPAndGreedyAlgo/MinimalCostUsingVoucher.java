@@ -7,7 +7,7 @@ public class MinimalCostUsingVoucher {
 
 	/*
 	链接：https://www.nowcoder.com/questionTerminal/95329d9a55b94e3fb2da475d3d052164?toCommentId=3377639
-来源：牛客网
+	来源：牛客网
 
 	你打开了美了么外卖，选择了一家店，你手里有一张满X元减10元的券，店里总共有n种菜，
 	第i种菜一份需要A_i元，因为你不想吃太多份同一种菜，所以每种菜你最多只能点一份，

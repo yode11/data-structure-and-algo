@@ -1,8 +1,11 @@
 package DPAndGreedyAlgo;
 
+import java.util.Arrays;
+
 public class MonsterProblem {
 
 	/*
+
 	题目：
 	int[] d，d[i]：i号怪兽的能力
 	int[] p，p[i]：i号怪兽要求的钱
@@ -14,6 +17,7 @@ public class MonsterProblem {
 	然后怪兽就会加入你，他的能力直接累加到你的能力上。
 
 	返回通过所有的怪兽，需要花的最小钱数
+
 	 */
 
 	public static void main(String[] args) {
@@ -31,13 +35,59 @@ public class MonsterProblem {
 			long ansRecursion = funcRecursion(d, p);
 			int ansHelper1 = helper1(d, p);
 			int ansHelper2 = helper2(d, p);
+			int ansHelper1Compressed = helper1WithCompressedSpace(d, p);
+			int ansHelper2Compressed = helper2WithCompressedSpace(d, p);
 
 			if (ansRecursion != ansHelper1) {
 				System.out.println("你写的helper1方法得到的答案和对数器的答案不一样啊");
+				System.out.println("能力值数组d为：");
+				for (int a : d) {
+					System.out.print(a);
+				}
+				System.out.println("贿赂金额数组p为：");
+				for (int a : p) {
+					System.out.print(a);
+				}
+				System.out.println("正确答案是： " + ansRecursion + ", 而你的答案是：" + ansHelper1);
 			}
 
 			if (ansRecursion != ansHelper2) {
 				System.out.println("你写的helper2方法得到的答案和对数器的答案不一样啊");
+				System.out.println("能力值数组d为：");
+				for (int a : d) {
+					System.out.print(a);
+				}
+				System.out.println("贿赂金额数组p为：");
+				for (int a : p) {
+					System.out.print(a);
+				}
+				System.out.println("正确答案是： " + ansRecursion + ", 而你的答案是：" + ansHelper2);
+			}
+
+			if (ansRecursion != ansHelper1Compressed) {
+				System.out.println("你写的空间最优的helper1方法得到的答案和对数器的答案不一样啊");
+				System.out.println("能力值数组d为：");
+				for (int a : d) {
+					System.out.print(a);
+				}
+				System.out.println("贿赂金额数组p为：");
+				for (int a : p) {
+					System.out.print(a);
+				}
+				System.out.println("正确答案是： " + ansRecursion + ", 而你的答案是：" + ansHelper1Compressed);
+			}
+
+			if (ansRecursion != ansHelper2Compressed) {
+				System.out.println("你写的空间最优的helper2方法得到的答案和对数器的答案不一样啊");
+				System.out.println("能力值数组d为：");
+				for (int a : d) {
+					System.out.print(a);
+				}
+				System.out.println("贿赂金额数组p为：");
+				for (int a : p) {
+					System.out.print(a);
+				}
+				System.out.println("正确答案是： " + ansRecursion + ", 而你的答案是：" + ansHelper2Compressed);
 			}
 		}
 
@@ -127,9 +177,38 @@ public class MonsterProblem {
 		int res = Integer.MAX_VALUE;
 
 		for (int j = 0; j <= sum; j++) {
-			if (dp[n - 1][j] > 0) {
-				res = Math.min(res, dp[n - 1][j]);
+			res = Math.min(res, dp[n - 1][j]);
+		}
+
+		return res == Integer.MAX_VALUE ? -1 : res;
+	}
+
+	private static int helper1WithCompressedSpace(int[] d, int[] p) {
+		int n = d.length;
+
+		int sum = 0;
+		for (int a : d) {
+			sum += a;
+		}
+
+		// 建立空间复杂度最优的DP数组，进行初始化设置
+		int[] dp = new int[sum + 1];
+		Arrays.fill(dp, Integer.MAX_VALUE);
+		dp[d[0]] = p[0];
+
+		for (int i = 1; i < n; i++) {
+			for (int j = sum; j >= 0; j--) {
+				if (j >= d[i]) {
+					dp[j] = dp[j - d[i]] == Integer.MAX_VALUE ? dp[j] : Math.min(dp[j], dp[j - d[i]] + p[i]);
+				} else {
+					dp[j] = Integer.MAX_VALUE;
+				}
 			}
+		}
+
+		int res = Integer.MAX_VALUE;
+		for (int i = 0; i <= sum; i++) {
+			res = Math.min(res, dp[i]);
 		}
 
 		return res == Integer.MAX_VALUE ? -1 : res;
@@ -185,6 +264,41 @@ public class MonsterProblem {
 
 		for (int i = 0; i <= sum; i++) {
 			if (dp[n - 1][i] > 0) {
+				res = i;
+				break;
+			}
+		}
+
+		return res;
+	}
+
+
+	private static int helper2WithCompressedSpace(int[] d, int[] p) {
+		int n = d.length;
+
+		int sum = 0;
+		for (int a : p) {
+			sum += a;
+		}
+
+		// 建立空间复杂度最优的DP数组，进行初始化设置
+		int[] dp = new int[sum + 1];
+		Arrays.fill(dp, -1);
+		dp[p[0]] = d[0];
+
+		for (int i = 1; i < n; i++) {
+			for (int j = sum; j >= 0; j--) {
+				int p1 = dp[j] >= d[i] ? dp[j] : -1;
+
+				int p2 = (j >= p[i] && dp[j - p[i]] != -1) ? dp[j - p[i]] + d[i] : -1;
+
+				dp[j] = Math.max(p1, p2);
+			}
+		}
+
+		int res = -1;
+		for (int i = 0; i <= sum; i++) {
+			if (dp[i] > 0) {
 				res = i;
 				break;
 			}
