@@ -143,9 +143,20 @@ public class MinimalCostUsingVoucher {
 			}
 		}
 
+		// 148行 - 152行和154行到161行在本题是一样的效果，但是换成如MonsterProblem问题，用后者还是更稳妥。
+		// 对j的分情况讨论最好还是放到循环体中用if else来判断，不容易乱。
+//		for (int i = 1; i < dishNum; i++) {
+//			for (int j = maxValue; j >= prices[i]; j--) {
+//				dp[j] = Math.max(dp[j], dp[j - prices[i]] + prices[i]);
+//			}
+//		}
+
 		for (int i = 1; i < dishNum; i++) {
-			for (int j = maxValue; j >= prices[i]; j--) {
-				dp[j] = Math.max(dp[j], dp[j - prices[i]] + prices[i]);
+			for (int j = maxValue; j >= 0; j--) {
+				if (j >= prices[i]) {
+					dp[j] = Math.max(dp[j], dp[j - prices[i]] + prices[i]);
+
+				}
 			}
 		}
 

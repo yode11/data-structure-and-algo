@@ -1,6 +1,6 @@
 package DPAndGreedyAlgo;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class MonsterProblem {
 
