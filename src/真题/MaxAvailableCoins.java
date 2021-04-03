@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * 360 2021年3月春招
- *
+ * <p>
  * 题目：
  * 现在有两个等长数组，长度为N。第一个数组coins，表示每个index位置是一个宝库，值是这个宝库里有的金币数量；
  * 第二个数组distance，每个index位置的值表示当前位置距离第一个位置（index=0）的距离。
@@ -25,7 +25,7 @@ public class MaxAvailableCoins {
 			int[] distance = new int[N];
 			int[] coins = new int[N];
 
-			for(int i=0;i<N;i++){
+			for (int i = 0; i < N; i++) {
 				distance[i] = sc.nextInt();
 				coins[i] = sc.nextInt();
 			}
@@ -34,18 +34,18 @@ public class MaxAvailableCoins {
 		}
 	}
 
-	static private int helper(int[] distance, int[] coins, int N, int M, int K){
-		int[][] dp = new int[K+1][N];
-		for(int i=0;i<N;i++){
+	static private int helper(int[] distance, int[] coins, int N, int M, int K) {
+		int[][] dp = new int[K + 1][N];
+		for (int i = 0; i < N; i++) {
 			dp[0][i] = coins[i];
 		}
 
-		for(int i=1;i<=K;i++){
-			for(int j=N-1;j>=0;j--){
+		for (int i = 1; i <= K; i++) {
+			for (int j = N - 1; j >= 0; j--) {
 				int max = 0;
-				int m = j+1;
-				while(m < N && distance[m] - distance[j] <= M){
-					max = Math.max(max, dp[i-1][m]);
+				int m = j + 1;
+				while (m < N && distance[m] - distance[j] <= M) {
+					max = Math.max(max, dp[i - 1][m]);
 					m++;
 				}
 
