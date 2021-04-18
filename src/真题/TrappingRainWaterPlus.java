@@ -80,14 +80,14 @@ public class TrappingRainWaterPlus {
 	 * 最后就是求这个这个boolean数组中出现的连在一起的"true块"的数量。
 	 */
 	public static int trapRainWaterIIPlus(int[][] heightMap) {
-		int[][] guide = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+		int[][] neighbors = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 		int n = heightMap.length;
 		int m = heightMap[0].length;
 		//保存被访问过的地板
 		boolean[][] visited = new boolean[n][m];
 		//保存能被注水的地板
-		boolean[][] isok = new boolean[n][m];
+		boolean[][] waterBeTrapped = new boolean[n][m];
 		//优先队列,重写比较器,使高度最小的永远在这个队列最前面
 		PriorityQueue<int[]> queue = new PriorityQueue<>(new Comparator<int[]>() {
 			@Override
@@ -113,12 +113,12 @@ public class TrappingRainWaterPlus {
 			int[] tem = queue.poll();
 			//遍历当前地板(周围一圈最小地板)周围四个地板
 			for (int i = 0; i < 4; i++) {
-				int tx = tem[0] + guide[i][0];
-				int ty = tem[1] + guide[i][1];
+				int tx = tem[0] + neighbors[i][0];
+				int ty = tem[1] + neighbors[i][1];
 				if (tx >= 0 && ty >= 0 && tx < n && ty < m && !visited[tx][ty]) {
 					//如果比这个最小地板还小,那它肯定能注水
 					if (tem[2] > heightMap[tx][ty]) {
-						isok[tx][ty] = true;
+						waterBeTrapped[tx][ty] = true;
 					}
 					//访问过设为true
 					visited[tx][ty] = true;
@@ -133,22 +133,33 @@ public class TrappingRainWaterPlus {
 		for (int i = 0; i < n; i++)
 			for (int j = 0; j < m; j++) {
 				//每当出现一次true,就将其连着的true全设为false
-				if (isok[i][j]) {
-					dfs(i, j, isok, m, n, guide);
+				if (waterBeTrapped[i][j]) {
+					infect(i, j, waterBeTrapped, m, n);
 					sum++;
 				}
 			}
 		return sum;
 	}
 
-	private static void dfs(int a, int b, boolean[][] isok, int m, int n, int[][] guide) {
-		for (int i = 0; i < 4; i++) {
-			int temi = a + guide[i][0];
-			int temj = a + guide[i][1];
-			if (temi >= 0 && temi < n && temj >= 0 && temj < m && isok[temi][temj]) {
-				isok[temi][temj] = false;
-				dfs(temi, temj, isok, m, n, guide);
-			}
+	// LC 200 岛屿数量，并查集
+	private static void infect(int i, int j, boolean[][] waterBeTrapped, int m, int n) {
+		if (i < 0 || i >= n || j < 0 || j >= m || !waterBeTrapped[i][j]) {
+			return;
 		}
+
+		waterBeTrapped[i][j] = false;
+
+		infect(i + 1, j, waterBeTrapped, m, n);
+		infect(i - 1, j, waterBeTrapped, m, n);
+		infect(i, j + 1, waterBeTrapped, m, n);
+		infect(i, j - 1, waterBeTrapped, m, n);
+	}
+
+	
+	public static void main(String[] args) {
+		int[][] heightMap = new int[][]{{1, 4, 3, 1, 3, 2}, {3, 2, 1, 3, 2, 4}, {2, 3, 3, 2, 3, 1}};
+
+		int res = trapRainWaterIIPlus(heightMap);
+		System.out.println(res);
 	}
 }
