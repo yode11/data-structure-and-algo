@@ -4,6 +4,20 @@
 //import java.util.*;
 //
 //public class ModelInOut {
+// 输入空行回车，结束输入
+//	public static void main(String[] args) {
+//			Scanner in = new Scanner(System.in);
+//			while(in.hasNextLine()){//第一处
+//			String s = in.nextLine();
+//			if(s.length() == 0)//第二处
+//			break;
+//			System.out.println(s);
+//			}
+//			System.out.println("Over Input");
+//			}
+
+
+
 //	/**
 //	 * 1.数组求和 一直输入
 //	 * 1 5

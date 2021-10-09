@@ -1,4 +1,4 @@
-package debug;
+package lcdebug;
 
 import java.util.HashMap;
 

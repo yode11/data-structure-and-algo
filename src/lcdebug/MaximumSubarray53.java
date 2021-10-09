@@ -1,4 +1,4 @@
-package debug;
+package lcdebug;
 
 public class MaximumSubarray53 {
 	private static int maxSubArray(int[] nums) {

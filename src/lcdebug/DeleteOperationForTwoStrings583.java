@@ -1,4 +1,4 @@
-package debug;
+package lcdebug;
 
 public class DeleteOperationForTwoStrings583 {
 

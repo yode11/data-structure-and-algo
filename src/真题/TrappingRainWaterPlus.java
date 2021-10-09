@@ -155,7 +155,7 @@ public class TrappingRainWaterPlus {
 		infect(i, j - 1, waterBeTrapped, m, n);
 	}
 
-	
+
 	public static void main(String[] args) {
 		int[][] heightMap = new int[][]{{1, 4, 3, 1, 3, 2}, {3, 2, 1, 3, 2, 4}, {2, 3, 3, 2, 3, 1}};
 

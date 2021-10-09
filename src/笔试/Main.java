@@ -1,6 +1,5 @@
 package 笔试;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.io.*;
 import java.util.*;
 import java.text.*;
@@ -8,85 +7,82 @@ import java.math.*;
 import java.util.regex.*;
 
 public class Main {
-
-	private static int helper(int target, Map<Integer, List<Integer>> map) {
-
-
-//		4
-//		1,2
-//		3,4,5,6
-//		2,3
-//		6,4,2
-//		8,9
-//		10
-		Set<Integer> set = new HashSet<>();
-		Queue<Integer> q = new LinkedList<>();
-		q.offer(target);
-		set.add(target);
-
-		int res = 0;
-
-		while(!q.isEmpty()){
-			int cur = q.poll();
-			res += cur;
-
-			for(Integer i : map.get(cur)){
-				if(!set.contains(i)){
-					set.add(i);
-					q.offer(i);
-				}
-			}
-		}
-
-		if(res == target){
-			return -1;
-		}
-
-		return res - target;
-	}
-
-
-	public static void main(String[] args){
+//7
+//1 1 A
+//1 2 B
+//1 5 A
+//1 3 C
+//1 4 D
+//2 A B
+//2 B C
+	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 
-		String line = in.nextLine();
-		Scanner in2 = new Scanner(line);
+		int n = in.nextInt();
+		in.nextLine();
 
-//		int target = in2.nextInt();
-//		System.out.println("target" + target);
+		Node[] orderList = new Node[100];
+		int groupIdx = 0;
 
-		boolean targethave = false;
-		int target = 0;
+		Map<String, List<String>> map = new HashMap<>();
 
-		Map<Integer, List<Integer>> map = new HashMap<>();
+		for(int i=0;i<n;i++){
+			String[] arr = in.nextLine().split(" ");
 
-		while(in2.hasNext()){
-			if(!targethave){
-				target = in2.nextInt();
-				targethave = true;
-				continue;
-			}
+			String ope = arr[0];
+			String num = arr[1];
+			String group = arr[2];
 
-			String[] tmp = in2.nextLine().split(",");
-
-			if(tmp.length == 1){
-				continue;
-			}
-
-			int relied = Integer.parseInt(tmp[0]);
-
-			for(int i=1;i<tmp.length;i++){
-				int num = Integer.parseInt(tmp[i]);
-
-				if(!map.containsKey(num)){
-					map.put(num, new ArrayList<>());
+			if(ope.equals("1")){
+				// 增加车厢
+				if(!map.containsKey(group)){
+					map.put(group, new ArrayList<>());
 				}
-				map.get(num).add(relied);
-			}
+				map.get(group).add(num);
 
+				orderList[groupIdx] = new Node(group, groupIdx);
+				groupIdx++;
+			}
+			else{
+				// 交换两个group系列
+				Node n1 = new Node("", 0);
+				Node n2 = new Node("", 0);
+				for(Node node : orderList){
+					if(node.group.equals(num)){
+						n1 = node;
+					}
+					if(node.group.equals(group)){
+						n2 = node;
+					}
+				}
+
+				int tmp = n1.order;
+				n1.order = n2.order;
+				n2.order = tmp;
+			}
 		}
 
-		System.out.println(helper(target, map));
+		Arrays.sort(orderList, new MyComparator());
+		for(Node node : orderList){
+			if(node!=null){
+				
+			}
+		}
+	}
 
+	static class Node{
+		String group;
+		int order;
+		Node(String group, int order){
+			this.group = group;
+			this.order = order;
+		}
+	}
+
+	static class MyComparator implements Comparator<Node>{
+		@Override
+		public int compare(Node n1, Node n2){
+			return n1.order - n2.order;
+		}
 	}
 }
