@@ -1,6 +1,9 @@
-package javabasics;
+package languagebasics;
 
-public class ExceptionTutorial {
+/**
+ * 异常类和异常处理机制
+ */
+public class ExceptionDemo {
 	public static void main(String[] args) {
 //		try {
 //			fun();

@@ -1,9 +1,9 @@
-package javabasics;
+package languagebasics;
 
 /**
  * 类的继承，多态的应用
  */
-public class PolymorphismTutorial {
+public class PolymorphismDemo {
 
 	static class Father {
 		String name;

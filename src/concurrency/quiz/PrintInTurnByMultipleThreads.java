@@ -1,6 +1,9 @@
-package javabasics;
+package concurrency.quiz;
 
-public class MultiThreadPrintTutorial {
+/**
+ * 多线程交替打印的多种实现版本
+ */
+public class PrintInTurnByMultipleThreads {
 	public static final Object OBJECT = new Object();
 	public static int count = 1;
 

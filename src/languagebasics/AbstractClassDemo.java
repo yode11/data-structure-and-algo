@@ -1,9 +1,9 @@
-package javabasics;
+package languagebasics;
 
 /**
  * 抽象类和抽象方法
  */
-public class AbstractClassTutorial {
+public class AbstractClassDemo {
 
 	/**
 	 * 抽象类无法实例化，但是可以有成员变量，成员方法，构造器

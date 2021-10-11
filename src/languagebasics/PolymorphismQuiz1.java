@@ -1,4 +1,4 @@
-package javabasics;
+package languagebasics;
 
 /**
  * 有关多态、继承的小练习，判断a,b,ab分别调用.show()方法，会输出什么
