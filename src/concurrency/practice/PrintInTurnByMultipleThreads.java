@@ -1,4 +1,4 @@
-package concurrency.quiz;
+package concurrency.practice;
 
 /**
  * 多线程交替打印的多种实现版本

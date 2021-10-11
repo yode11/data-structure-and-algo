@@ -1,9 +1,9 @@
-package projectpractice;
+package projectpractice.utils;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 
-public abstract class BigDecimalTrial {
+public abstract class BigDecimalDemo {
 	public static void main(String[] args) {
 		BigDecimal bigDecimal = new BigDecimal("3.0");
 		final BigDecimal bigDecimal1 = new BigDecimal("3.00");

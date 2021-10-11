@@ -1,10 +1,10 @@
-package projectpractice;
+package projectpractice.datetimeoperation;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-public class LocalDateTrial {
+public class LocalDateDemo {
 
 	public static void main(String[] args) {
 		// 当天日期 年-月-日

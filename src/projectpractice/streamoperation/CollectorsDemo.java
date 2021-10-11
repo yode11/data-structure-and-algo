@@ -1,4 +1,4 @@
-package projectpractice;
+package projectpractice.streamoperation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class CollectorsTrial {
+public class CollectorsDemo {
 
-	public static class Node {
+	static class Node {
 		private String serviceOrderCode;
 		private String serviceItemCode;
 

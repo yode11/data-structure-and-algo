@@ -1,8 +1,8 @@
-package projectpractice;
+package projectpractice.datetimeoperation;
 
 import java.time.LocalDateTime;
 
-public class LocalDateTimeTrial {
+public class LocalDateTimeDemo {
 
 	public static void main(String[] args) {
 		LocalDateTime localDateTime = LocalDateTime.now();

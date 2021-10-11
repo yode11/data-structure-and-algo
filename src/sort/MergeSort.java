@@ -24,7 +24,9 @@ public class MergeSort {
 	}
 
 	private void mergeSortInternally(int[] nums, int left, int right){
-		if(left>=right) return;
+		if(left>=right) {
+			return;
+		}
 
 		int mid = left + (right-left)/2;
 
@@ -40,12 +42,19 @@ public class MergeSort {
 		int[] tmpArray = new int[right-left+1];
 
 		while(i<=mid && j<=right){
-			if(nums[i]<=nums[j]) tmpArray[idx++] = nums[i++];
-			else tmpArray[idx++] = nums[j++];
+			if(nums[i]<=nums[j]) {
+				tmpArray[idx++] = nums[i++];
+			} else {
+				tmpArray[idx++] = nums[j++];
+			}
 		}
 
-		while(i<=mid) tmpArray[idx++] = nums[i++];
-		while(j<=right) tmpArray[idx++] = nums[j++];
+		while(i<=mid) {
+			tmpArray[idx++] = nums[i++];
+		}
+		while(j<=right) {
+			tmpArray[idx++] = nums[j++];
+		}
 
 		for(int k=0;k<right-left+1;k++){
 			nums[k+left] = tmpArray[k];

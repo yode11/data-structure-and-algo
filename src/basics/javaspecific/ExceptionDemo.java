@@ -1,4 +1,4 @@
-package languagebasics;
+package basics.javaspecific;
 
 /**
  * 异常类和异常处理机制

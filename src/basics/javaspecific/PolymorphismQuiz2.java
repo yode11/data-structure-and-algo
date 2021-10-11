@@ -1,4 +1,4 @@
-package languagebasics;
+package basics.javaspecific;
 
 /**
  * 多态的优先级

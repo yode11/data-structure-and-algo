@@ -24,7 +24,9 @@ public class QuickSort {
 	}
 
 	private void quickSortInternally(int[] nums, int left, int right){
-		if(left>=right) return;
+		if(left>=right) {
+			return;
+		}
 		int pivot = partition(nums, left, right);
 
 		quickSortInternally(nums, left, pivot-1);

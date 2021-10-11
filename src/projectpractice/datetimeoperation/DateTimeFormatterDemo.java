@@ -1,9 +1,9 @@
-package projectpractice;
+package projectpractice.datetimeoperation;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class DateTimeFormatterTrial {
+public class DateTimeFormatterDemo {
 
 	public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
 	public static final DateTimeFormatter HH_MM = DateTimeFormatter.ofPattern("HH:mm");

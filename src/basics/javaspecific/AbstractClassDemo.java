@@ -1,4 +1,4 @@
-package languagebasics;
+package basics.javaspecific;
 
 /**
  * 抽象类和抽象方法

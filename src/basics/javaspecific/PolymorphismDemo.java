@@ -1,4 +1,4 @@
-package languagebasics;
+package basics.javaspecific;
 
 /**
  * 类的继承，多态的应用

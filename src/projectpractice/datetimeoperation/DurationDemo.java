@@ -1,4 +1,4 @@
-package projectpractice;
+package projectpractice.datetimeoperation;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * 计算LocalDateTime对象之间的时间差，用Duration类的.between()方法
  *
  */
-public class DurationTrial {
+public class DurationDemo {
 
 	public static void main(String[] args) {
 		final LocalDateTime now = LocalDateTime.now();

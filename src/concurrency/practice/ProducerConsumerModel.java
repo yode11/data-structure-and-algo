@@ -1,4 +1,4 @@
-package concurrency.quiz;
+package concurrency.practice;
 
 /**
  * 多种方法实现生产者-消费者模型
