@@ -1,10 +1,12 @@
-package concurrency.practice.multiplethreadsprint;
+package concurrency.practice.printoddeven;
 
 /**
  * 两个线程交替打印，一个打印奇数，一个打印偶数，范围从0~100
  * synchronized关键字实现版本
  *
  * 此版本和wait/notify版本的区别是，两个线程固定一个只能打印奇数，一个只能打印偶数
+ *
+ * reference from 悟空
  */
 public class PrintOddEvenSynchronized {
 	private static int count = 0;

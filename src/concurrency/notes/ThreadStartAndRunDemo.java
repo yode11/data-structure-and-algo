@@ -1,4 +1,4 @@
-package concurrency.practice;
+package concurrency.notes;
 
 /**
  * Thread类中.start()方法和.run()方法的区别
@@ -15,16 +15,25 @@ public class ThreadStartAndRunDemo {
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
 				System.out.println("pong");
+				System.out.println(Thread.currentThread().getName());
 			}
 		});
 
-		// block A
-		t1.run();
-		System.out.println("ping");
-
-		// block B
-//		t1.start();
+//		// block A —— 不建议调用run
+//		t1.run();
+//		System.out.println(Thread.currentThread().getName());
 //		System.out.println("ping");
+
+//		 block B —— 建议调用start
+		t1.start();
+		System.out.println(Thread.currentThread().getName());
+		System.out.println("ping");
 	}
 }

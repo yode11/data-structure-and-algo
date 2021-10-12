@@ -1,4 +1,4 @@
-package concurrency.practice;
+package concurrency.practice.producerconsumermodel;
 
 // * 多种方法实现生产者-消费者模型
 

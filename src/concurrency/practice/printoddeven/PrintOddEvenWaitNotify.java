@@ -1,8 +1,10 @@
-package concurrency.practice.multiplethreadsprint;
+package concurrency.practice.printoddeven;
 
 /**
  * 两个线程交替打印，一个打印奇数，一个打印偶数，范围从0~100
  * wait/notify实现版本
+ *
+ * reference from 悟空
  */
 public class PrintOddEvenWaitNotify {
 	private static int count = 0;

@@ -1,15 +1,17 @@
-package concurrency.practice.multiplethreadsprint;
+package concurrency.practice.printabc;
 
 /**
- * 建立三个线程A、B、C，A线程打印10次字母A，B线程打印10次字母B,C线程打印10次字母C，但是要求三个线程同时运行，并且实现交替打印，即按照ABCABCABC的顺序打印。
- * synchronized关键字实现版本，第一版
+ * 建立三个线程A、B、C。A线程打印10次字母A，B线程打印10次字母B,C线程打印10次字母C，
+ * 但是要求三个线程同时运行，并且实现交替打印，即按照ABCABCABC……的顺序打印。
+ *
+ * synchronized关键字实现版本，第一版，用三个布尔值变量帮助获取到时间片的线程判断自己是否应该打印
  *
  * https://segmentfault.com/a/1190000021433079
  */
-public class PrintABCSynchronized1 {
+public class PrintABCSynchronizedBoolean {
+
 	// 使用布尔变量对打印顺序进行控制，true表示轮到当前线程打印
-	// 使用Object类的notify()，notifyAll()和wait()方法，无法针对指定线程，所以需要boolean值对线程执行顺序做控制
-	private static boolean startA = true;
+	private static boolean startA = true; // 由打印A的线程先开始打印
 	private static boolean startB = false;
 	private static boolean startC = false;
 
