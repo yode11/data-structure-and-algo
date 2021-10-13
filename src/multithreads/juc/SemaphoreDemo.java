@@ -1,4 +1,4 @@
-package concurrency.juc;
+package multithreads.juc;
 
 public class SemaphoreDemo {
 }

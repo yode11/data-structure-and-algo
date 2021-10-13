@@ -1,4 +1,4 @@
-package concurrency.practice.producerconsumermodel;
+package multithreads.practice.producerconsumermodel;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -7,17 +7,22 @@ import java.util.LinkedList;
  * 用wait/notify来实现生产者消费者模型
  */
 public class ProduConsuModelWaitNotify {
+
+	// 队列最大容量
+	static int maxCapacity = 10;
+
+	// 队列
+	static LinkedList<LocalDateTime> queue = new LinkedList<>();
+
+	// 生产者消费者线程争夺对象锁
+	static final Object OBJECT = new Object();
+
+
 	public static void main(String[] args) {
 		new Thread(new Producer()).start();
 		new Thread(new Consumer()).start();
 	}
 
-	// 队列最大容量
-	static int maxCapacity = 10;
-	// 队列
-	static LinkedList<LocalDateTime> queue = new LinkedList<>();
-	// 生产者消费者线程争夺对象锁
-	static final Object OBJECT = new Object();
 
 	static class Producer implements Runnable{
 		@Override

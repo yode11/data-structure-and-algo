@@ -1,4 +1,4 @@
-package concurrency.practice.printoddeven;
+package multithreads.practice.printoddeven;
 
 /**
  * 两个线程交替打印，一个打印奇数，一个打印偶数，范围从0~100

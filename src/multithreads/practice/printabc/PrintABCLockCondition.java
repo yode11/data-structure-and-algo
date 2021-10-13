@@ -1,4 +1,4 @@
-package concurrency.practice.printabc;
+package multithreads.practice.printabc;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;

@@ -1,4 +1,4 @@
-package concurrency.practice.deadlock;
+package multithreads.practice.deadlock;
 
 /**
  * 实现一个死锁的例子，顺便讲一下什么是死锁

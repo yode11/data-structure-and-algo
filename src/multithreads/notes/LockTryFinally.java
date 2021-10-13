@@ -1,4 +1,4 @@
-package concurrency.notes;
+package multithreads.notes;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

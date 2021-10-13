@@ -1,4 +1,4 @@
-package concurrency.practice.producerconsumermodel;
+package multithreads.practice.producerconsumermodel;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;

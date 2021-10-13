@@ -1,4 +1,4 @@
-package concurrency.notes;
+package multithreads.notes;
 
 /**
  * 开启一个线程，执行相应任务，普通写法和lambda表达式写法

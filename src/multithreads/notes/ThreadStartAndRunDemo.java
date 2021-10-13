@@ -1,4 +1,4 @@
-package concurrency.notes;
+package multithreads.notes;
 
 /**
  * Thread类中.start()方法和.run()方法的区别
