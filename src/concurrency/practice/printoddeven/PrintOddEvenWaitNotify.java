@@ -29,6 +29,7 @@ public class PrintOddEvenWaitNotify {
 					OBJECT.notify();
 
 					// 如果任务还没有结束，释放锁资源，自己进入休眠
+					// 如果count == 100，说明打印任务已经完成，本线程就不需要阻塞了，否则任务无法结束
 					if(count <= 100){
 						try {
 							OBJECT.wait();
