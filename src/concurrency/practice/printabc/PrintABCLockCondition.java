@@ -12,8 +12,10 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class PrintABCLockCondition {
 	public static void main(String[] args) {
+
 		// 锁对象
 		Lock lock = new ReentrantLock();
+
 		// 三个condition对象，分别对应三个线程的锁
 		Condition conditionA = lock.newCondition();
 		Condition conditionB = lock.newCondition();

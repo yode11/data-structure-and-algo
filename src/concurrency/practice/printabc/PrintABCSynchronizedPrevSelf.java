@@ -4,7 +4,7 @@ package concurrency.practice.printabc;
  * 建立三个线程A、B、C，A线程打印10次字母A，B线程打印10次字母B,C线程打印10次字母C，
  * 但是要求三个线程同时运行，并且实现交替打印，即按照ABCABCABC……的顺序打印。
  *
- * synchronized关键字实现版本，第二版本，每个线程必须持同时有两个对象锁，才能打印
+ * synchronized关键字实现版本，第二版，每个线程必须持同时有两个对象锁，才能打印
  *
  * 	https://blog.csdn.net/xiaokang123456kao/article/details/77331878
  */
@@ -29,22 +29,20 @@ public class PrintABCSynchronizedPrevSelf {
 		Object c = new Object();
 
 		// 线程之间用sleep隔一段时间，保证以A,B,C的顺序打印，否则容易出现ACB的顺序
-		new Thread(new Task("A", c, a)).start();
-		Thread.sleep(10);
-		new Thread(new Task("B", a, b)).start();
-		Thread.sleep(10);
-		new Thread(new Task("C", b, c)).start();
+		new Thread(new Task(c, a), "A").start();
+		Thread.sleep(100);
+		new Thread(new Task(a, b), "B").start();
+		Thread.sleep(100);
+		new Thread(new Task(b, c), "C").start();
 	}
 
 
 	static class Task implements Runnable{
-		private String name;
 		private Object prev; // 前一个线程对应的对象锁
 		private Object self; // 本线程对应的对象锁
 		int count; // 打印次数
 
-		public Task(String name, Object prev, Object self){
-			this.name = name;
+		public Task(Object prev, Object self){
 			this.prev = prev;
 			this.self = self;
 			this.count = 10;
@@ -55,7 +53,7 @@ public class PrintABCSynchronizedPrevSelf {
 			while(count > 0){
 				synchronized (prev){
 					synchronized (self){
-						System.out.print(this.name);
+						System.out.printf(Thread.currentThread().getName());
 						count--;
 
 						// 唤醒下一顺次的线程，使其准备可以拿锁
